@@ -44,7 +44,7 @@ export default function FeaturedCarousel() {
   if (images.length === 0) {
     return (
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-card shadow flex items-center justify-center text-sm text-muted-foreground">
-        Mark some photos as “Featured” to see them scroll here.
+        Upload photos below. Mark any as “Featured” (optional) — all uploaded photos will scroll here.
       </div>
     );
   }
