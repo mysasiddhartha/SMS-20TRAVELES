@@ -3,7 +3,7 @@ import { Car, Bus, Bike } from "lucide-react";
 export default function Logo({ size = 28 }: { size?: number }) {
   return (
     <div
-      className="grid place-items-center rounded-md bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 shadow"
+      className="grid place-items-center rounded-md bg-gradient-to-br from-rose-500 via-orange-500 to-amber-400 shadow"
       style={{ width: size, height: size }}
       aria-label="SMS TRAVELS logo"
     >
