@@ -40,22 +40,9 @@ export default function Index() {
               </ul>
             </div>
             <div className="relative">
-              <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-card shadow">
-                <div className="grid h-full w-full grid-cols-3 gap-1 p-1">
-                  <div className="col-span-2 row-span-2 overflow-hidden rounded-lg">
-                    <img
-                      src="/placeholder.svg"
-                      alt="Cab and travel collage"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="overflow-hidden rounded-lg">
-                    <img src="/placeholder.svg" alt="Travel" className="h-full w-full object-cover" />
-                  </div>
-                  <div className="overflow-hidden rounded-lg">
-                    <img src="/placeholder.svg" alt="Travel" className="h-full w-full object-cover" />
-                  </div>
-                </div>
+              <div className="aspect-[4/3] w-full">
+                {/* Scrolling carousel of featured images */}
+                <FeaturedCarousel />
               </div>
               <div className="absolute -bottom-4 -left-4 -z-10 h-28 w-28 rounded-xl bg-gradient-to-br from-fuchsia-400 to-indigo-400 opacity-30 blur-2xl" />
             </div>
