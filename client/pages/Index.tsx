@@ -10,8 +10,16 @@ export default function Index() {
     <div>
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[hsl(var(--primary))]/10 via-fuchsia-200/30 to-indigo-200/30" />
-        <div className="container py-16 md:py-24">
-          <div className="grid gap-10 md:grid-cols-2 md:gap-12 items-center">
+        <div className="container py-10 md:py-14">
+          <div className="relative">
+            <div className="w-full">
+              <div className="aspect-[16/9] sm:aspect-[21/9] w-full">
+                <FeaturedCarousel />
+              </div>
+            </div>
+            <div className="absolute -bottom-6 -left-4 -z-10 h-28 w-28 rounded-xl bg-gradient-to-br from-fuchsia-400 to-indigo-400 opacity-30 blur-2xl" />
+          </div>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 md:gap-12 items-start">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground shadow-sm">
                 Reliable travel partner
@@ -39,13 +47,6 @@ export default function Index() {
                 <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Local city tours</li>
                 <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />24/7 support</li>
               </ul>
-            </div>
-            <div className="relative">
-              <div className="aspect-[4/3] w-full">
-                {/* Scrolling carousel of featured images */}
-                <FeaturedCarousel />
-              </div>
-              <div className="absolute -bottom-4 -left-4 -z-10 h-28 w-28 rounded-xl bg-gradient-to-br from-fuchsia-400 to-indigo-400 opacity-30 blur-2xl" />
             </div>
           </div>
         </div>
