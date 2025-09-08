@@ -13,55 +13,74 @@ interface StoredImage {
 function readFiles(files: FileList | File[]): Promise<StoredImage[]> {
   const arr = Array.from(files);
   return Promise.all(
-    arr.filter((f) => f.type.startsWith("image/")).map(
-      (file) =>
-        new Promise<StoredImage>((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () =>
-            resolve({
-              id: crypto.randomUUID(),
-              dataUrl: String(reader.result),
-              name: file.name,
-              createdAt: Date.now(),
-              featured: false,
-            });
-          reader.onerror = () => reject(reader.error);
-          reader.readAsDataURL(file);
-        }),
-    ),
+    arr
+      .filter((f) => f.type.startsWith("image/"))
+      .map(
+        (file) =>
+          new Promise<StoredImage>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () =>
+              resolve({
+                id: crypto.randomUUID(),
+                dataUrl: String(reader.result),
+                name: file.name,
+                createdAt: Date.now(),
+                featured: false,
+              });
+            reader.onerror = () => reject(reader.error);
+            reader.readAsDataURL(file);
+          }),
+      ),
   );
 }
 
 export default function ImageGallery() {
-  const [images, setImages] = useLocalStorage<StoredImage[]>("gallery.images", []);
+  const [images, setImages] = useLocalStorage<StoredImage[]>(
+    "gallery.images",
+    [],
+  );
   const [dragActive, setDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onFiles = useCallback(async (files: FileList | File[]) => {
-    const newImgs = await readFiles(files);
-    setImages((prev) => [...newImgs, ...prev]);
-  }, [setImages]);
+  const onFiles = useCallback(
+    async (files: FileList | File[]) => {
+      const newImgs = await readFiles(files);
+      setImages((prev) => [...newImgs, ...prev]);
+    },
+    [setImages],
+  );
 
-  const onDrop = useCallback(async (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      await onFiles(e.dataTransfer.files);
-      e.dataTransfer.clearData();
-    }
-  }, [onFiles]);
+  const onDrop = useCallback(
+    async (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        await onFiles(e.dataTransfer.files);
+        e.dataTransfer.clearData();
+      }
+    },
+    [onFiles],
+  );
 
-  const remove = (id: string) => setImages((prev) => prev.filter((i) => i.id !== id));
+  const remove = (id: string) =>
+    setImages((prev) => prev.filter((i) => i.id !== id));
   const toggleFeatured = (id: string) =>
-    setImages((prev) => prev.map((i) => (i.id === id ? { ...i, featured: !i.featured } : i)));
+    setImages((prev) =>
+      prev.map((i) => (i.id === id ? { ...i, featured: !i.featured } : i)),
+    );
 
   return (
     <section className="container py-14">
       <div className="flex items-end justify-between gap-6 flex-wrap">
         <div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Your Photos</h2>
-          <p className="mt-2 text-muted-foreground max-w-prose">Add images below. Your photos are saved in your browser so you can come back later.</p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            Your Photos
+          </h2>
+          <p className="mt-2 text-muted-foreground max-w-prose">
+            Add images below. Your photos are saved in your browser so you can
+            come back later.
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -82,25 +101,49 @@ export default function ImageGallery() {
       </div>
 
       <div
-        onDragEnter={(e) => { e.preventDefault(); e.stopPropagation(); setDragActive(true); }}
-        onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
-        onDragLeave={(e) => { e.preventDefault(); e.stopPropagation(); setDragActive(false); }}
+        onDragEnter={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setDragActive(true);
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+        onDragLeave={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setDragActive(false);
+        }}
         onDrop={onDrop}
         className={cn(
           "mt-6 rounded-xl border-2 border-dashed p-6 transition-colors",
-          dragActive ? "border-[hsl(var(--ring))] bg-muted/30" : "border-border",
+          dragActive
+            ? "border-[hsl(var(--ring))] bg-muted/30"
+            : "border-border",
         )}
       >
-        <p className="text-center text-sm text-muted-foreground">Drag and drop images here, or click "Add Photos"</p>
+        <p className="text-center text-sm text-muted-foreground">
+          Drag and drop images here, or click "Add Photos"
+        </p>
       </div>
 
       {images.length > 0 ? (
         <ul className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {images.map((img) => (
-            <li key={img.id} className="group relative overflow-hidden rounded-xl border bg-card">
-              <img src={img.dataUrl} alt={img.name} className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <li
+              key={img.id}
+              className="group relative overflow-hidden rounded-xl border bg-card"
+            >
+              <img
+                src={img.dataUrl}
+                alt={img.name}
+                className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
               {img.featured ? (
-                <span className="absolute left-2 top-2 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow">Featured</span>
+                <span className="absolute left-2 top-2 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow">
+                  Featured
+                </span>
               ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -121,7 +164,9 @@ export default function ImageGallery() {
           ))}
         </ul>
       ) : (
-        <p className="mt-6 text-center text-sm text-muted-foreground">No photos yet. Add some to get started.</p>
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          No photos yet. Add some to get started.
+        </p>
       )}
     </section>
   );

@@ -15,14 +15,17 @@ export default function Index() {
       const raw = localStorage.getItem(key);
       const current: any[] = raw ? JSON.parse(raw) : [];
       const existingUrls = new Set(current.map((i: any) => i.dataUrl));
-      const toAdd = SEED_IMAGE_URLS.filter((u) => !existingUrls.has(u)).map((url) => ({
-        id: crypto.randomUUID(),
-        dataUrl: url,
-        name: url.split("/").pop() || "image",
-        createdAt: Date.now(),
-        featured: true,
-      }));
-      if (toAdd.length) localStorage.setItem(key, JSON.stringify([...toAdd, ...current]));
+      const toAdd = SEED_IMAGE_URLS.filter((u) => !existingUrls.has(u)).map(
+        (url) => ({
+          id: crypto.randomUUID(),
+          dataUrl: url,
+          name: url.split("/").pop() || "image",
+          createdAt: Date.now(),
+          featured: true,
+        }),
+      );
+      if (toAdd.length)
+        localStorage.setItem(key, JSON.stringify([...toAdd, ...current]));
     } catch {}
   }, []);
 
@@ -48,7 +51,9 @@ export default function Index() {
                 {SITE.name}: Tours, cabs and trips made easy
               </h1>
               <p className="mt-4 text-muted-foreground max-w-prose">
-                Book outstation rides, airport transfers, and custom tours with comfort vehicles and friendly drivers. Add trip photos below to share your journeys.
+                Book outstation rides, airport transfers, and custom tours with
+                comfort vehicles and friendly drivers. Add trip photos below to
+                share your journeys.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
@@ -57,15 +62,30 @@ export default function Index() {
                 >
                   Call/Text {phone}
                 </a>
-                <a href="#cars" className="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold hover:bg-muted">
+                <a
+                  href="#cars"
+                  className="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold hover:bg-muted"
+                >
                   View Cars
                 </a>
               </div>
               <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Airport transfers</li>
-                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Outstation round trips</li>
-                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Local city tours</li>
-                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />24/7 support</li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />
+                  Airport transfers
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />
+                  Outstation round trips
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />
+                  Local city tours
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />
+                  24/7 support
+                </li>
               </ul>
             </div>
           </div>
@@ -75,8 +95,12 @@ export default function Index() {
       <section id="cars" className="container py-14">
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Cars</h2>
-            <p className="mt-2 text-muted-foreground max-w-prose">Browse car images. Use Next/Prev or tap the banner to move.</p>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              Cars
+            </h2>
+            <p className="mt-2 text-muted-foreground max-w-prose">
+              Browse car images. Use Next/Prev or tap the banner to move.
+            </p>
           </div>
         </div>
         <div className="mt-6">

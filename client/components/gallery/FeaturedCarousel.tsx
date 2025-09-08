@@ -13,28 +13,32 @@ interface StoredImage {
 const DEFAULT_IMAGES: StoredImage[] = [
   {
     id: "att-1",
-    dataUrl: "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2Fe28306c5520444ba9e6aab69183d6d84?format=webp&width=800",
+    dataUrl:
+      "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2Fe28306c5520444ba9e6aab69183d6d84?format=webp&width=800",
     name: "SMS Travels Poster 1",
     createdAt: 0,
     featured: true,
   },
   {
     id: "att-2",
-    dataUrl: "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2F18b5f7f446274470a24ad696a65f902c?format=webp&width=800",
+    dataUrl:
+      "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2F18b5f7f446274470a24ad696a65f902c?format=webp&width=800",
     name: "SMS Travels Poster 2",
     createdAt: 0,
     featured: true,
   },
   {
     id: "att-3",
-    dataUrl: "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2Ff57ab17ae367460595acde0e133821e9?format=webp&width=800",
+    dataUrl:
+      "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2Ff57ab17ae367460595acde0e133821e9?format=webp&width=800",
     name: "Office Photo 1",
     createdAt: 0,
     featured: true,
   },
   {
     id: "att-4",
-    dataUrl: "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2F82e44ce945f74525b2ed3abae4500b81?format=webp&width=800",
+    dataUrl:
+      "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2F82e44ce945f74525b2ed3abae4500b81?format=webp&width=800",
     name: "Office Photo 2",
     createdAt: 0,
     featured: true,
@@ -44,13 +48,17 @@ const DEFAULT_IMAGES: StoredImage[] = [
 export default function FeaturedCarousel() {
   const [allImages] = useLocalStorage<StoredImage[]>("gallery.images", []);
   const images = useMemo(() => {
-    const list = (allImages || []);
+    const list = allImages || [];
     if (list.length === 0) return DEFAULT_IMAGES;
     const featured = list.filter((i) => !!i.featured);
     return featured.length > 0 ? featured : list;
   }, [allImages]);
 
-  const [viewportRef, embla] = useEmblaCarousel({ loop: true, align: "start", containScroll: "trimSnaps" });
+  const [viewportRef, embla] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    containScroll: "trimSnaps",
+  });
   const timerRef = useRef<number | null>(null);
   const [paused, setPaused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -85,14 +93,22 @@ export default function FeaturedCarousel() {
   if (images.length === 0) {
     return (
       <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-card shadow flex items-center justify-center text-sm text-muted-foreground">
-        Upload photos below. Click on the image or dots to scroll. Mark any as “Featured” to highlight.
+        Upload photos below. Click on the image or dots to scroll. Mark any as
+        “Featured” to highlight.
       </div>
     );
   }
 
   return (
-    <div className="relative" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="overflow-hidden rounded-2xl border bg-card shadow h-[50vh] sm:h-[60vh] md:h-[70vh]" ref={viewportRef}>
+    <div
+      className="relative"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div
+        className="overflow-hidden rounded-2xl border bg-card shadow h-[50vh] sm:h-[60vh] md:h-[70vh]"
+        ref={viewportRef}
+      >
         <div className="flex h-full">
           {images.map((img) => (
             <button
@@ -102,7 +118,11 @@ export default function FeaturedCarousel() {
               onClick={() => embla?.scrollNext()}
               aria-label="Next slide"
             >
-              <img src={img.dataUrl} alt={img.name} className="h-full w-full object-contain bg-black/5" />
+              <img
+                src={img.dataUrl}
+                alt={img.name}
+                className="h-full w-full object-contain bg-black/5"
+              />
             </button>
           ))}
         </div>
@@ -114,7 +134,10 @@ export default function FeaturedCarousel() {
             key={i}
             type="button"
             onClick={() => embla?.scrollTo(i)}
-            className={(i === selectedIndex ? "bg-white" : "bg-white/60") + " h-1.5 w-3 rounded-full transition-colors"}
+            className={
+              (i === selectedIndex ? "bg-white" : "bg-white/60") +
+              " h-1.5 w-3 rounded-full transition-colors"
+            }
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

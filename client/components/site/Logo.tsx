@@ -10,7 +10,10 @@ export default function Logo({ size = 28 }: { size?: number }) {
       <div className="relative text-white">
         <Car size={size * 0.5} className="absolute -left-2 -top-1 opacity-90" />
         <Bus size={size * 0.6} className="opacity-95" />
-        <Bike size={size * 0.45} className="absolute -right-2 -bottom-1 opacity-80" />
+        <Bike
+          size={size * 0.45}
+          className="absolute -right-2 -bottom-1 opacity-80"
+        />
       </div>
     </div>
   );
