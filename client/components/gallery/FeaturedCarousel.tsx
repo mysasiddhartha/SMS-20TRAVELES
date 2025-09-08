@@ -12,7 +12,11 @@ interface StoredImage {
 
 export default function FeaturedCarousel() {
   const [allImages] = useLocalStorage<StoredImage[]>("gallery.images", []);
-  const images = useMemo(() => (allImages || []).filter((i) => !!i.featured), [allImages]);
+  const images = useMemo(() => {
+    const list = (allImages || []);
+    const featured = list.filter((i) => !!i.featured);
+    return featured.length > 0 ? featured : list;
+  }, [allImages]);
 
   const [viewportRef, embla] = useEmblaCarousel({ loop: true, align: "center" });
   const timerRef = useRef<number | null>(null);
