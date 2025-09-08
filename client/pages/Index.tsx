@@ -1,5 +1,6 @@
 import ImageGallery from "@/components/gallery/ImageGallery";
 import FeaturedCarousel from "@/components/gallery/FeaturedCarousel";
+import CarsCarousel from "@/components/cars/CarsCarousel";
 import { SITE, telHref } from "@/config/site";
 import { useEffect } from "react";
 import { SEED_IMAGE_URLS } from "@/config/seed-images";
@@ -56,8 +57,8 @@ export default function Index() {
                 >
                   Call/Text {phone}
                 </a>
-                <a href="#gallery" className="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold hover:bg-muted">
-                  Add Trip Photos
+                <a href="#cars" className="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold hover:bg-muted">
+                  View Cars
                 </a>
               </div>
               <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-muted-foreground">
@@ -68,6 +69,19 @@ export default function Index() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="cars" className="container py-14">
+        <div className="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Cars</h2>
+            <p className="mt-2 text-muted-foreground max-w-prose">Browse car images. Use Next/Prev or tap the banner to move.</p>
+          </div>
+        </div>
+        <div className="mt-6">
+          {/* @ts-expect-error default export */}
+          <CarsCarousel />
         </div>
       </section>
 
