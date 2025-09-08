@@ -13,13 +13,13 @@ export default function Index() {
           <div className="grid gap-10 md:grid-cols-2 md:gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground shadow-sm">
-                Simple site to share your photos
+                Reliable travel partner
               </div>
               <h1 className="mt-4 text-4xl leading-tight font-extrabold tracking-tight sm:text-5xl">
-                Showcase your pictures and make it easy to contact you
+                {SITE.name}: Tours, cabs and trips made easy
               </h1>
               <p className="mt-4 text-muted-foreground max-w-prose">
-                Upload your favorite photos, organize them in a beautiful grid, and keep your phone number front and center so people can reach you instantly.
+                Book outstation rides, airport transfers, and custom tours with comfort vehicles and friendly drivers. Add trip photos below to share your journeys.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
@@ -29,9 +29,15 @@ export default function Index() {
                   Call/Text {phone}
                 </a>
                 <a href="#gallery" className="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold hover:bg-muted">
-                  Add Photos
+                  Add Trip Photos
                 </a>
               </div>
+              <ul className="mt-6 grid grid-cols-2 gap-3 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Airport transfers</li>
+                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Outstation round trips</li>
+                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />Local city tours</li>
+                <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />24/7 support</li>
+              </ul>
             </div>
             <div className="relative">
               <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border bg-card shadow">
@@ -39,15 +45,15 @@ export default function Index() {
                   <div className="col-span-2 row-span-2 overflow-hidden rounded-lg">
                     <img
                       src="/placeholder.svg"
-                      alt="Gallery preview"
+                      alt="Cab and travel collage"
                       className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="overflow-hidden rounded-lg">
-                    <img src="/placeholder.svg" alt="Preview" className="h-full w-full object-cover" />
+                    <img src="/placeholder.svg" alt="Travel" className="h-full w-full object-cover" />
                   </div>
                   <div className="overflow-hidden rounded-lg">
-                    <img src="/placeholder.svg" alt="Preview" className="h-full w-full object-cover" />
+                    <img src="/placeholder.svg" alt="Travel" className="h-full w-full object-cover" />
                   </div>
                 </div>
               </div>
