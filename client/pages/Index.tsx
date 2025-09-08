@@ -1,8 +1,9 @@
 import ImageGallery from "@/components/gallery/ImageGallery";
+import { SITE, telHref } from "@/config/site";
 
 export default function Index() {
-  const phone = "+1 (555) 555-5555";
-  const tel = phone.replace(/[^+\d]/g, "");
+  const phone = SITE.phone;
+  const tel = telHref(phone);
 
   return (
     <div>
@@ -22,7 +23,7 @@ export default function Index() {
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
-                  href={`tel:${tel}`}
+                  href={tel}
                   className="inline-flex items-center justify-center rounded-md bg-[hsl(var(--primary))] px-5 py-3 text-sm font-semibold text-[hsl(var(--primary-foreground))] shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]"
                 >
                   Call/Text {phone}
