@@ -6,3 +6,5 @@ export const SEED_IMAGE_URLS: string[] = [
   // New image provided
   "https://cdn.builder.io/api/v1/image/assets%2F8ee80c2176264463ba10e7ae7fa5e693%2Fbbfcdc1e79c743c4b40604d8405713ee?format=webp&width=800",
 ];
+
+export const CAR_IMAGE_URLS: string[] = SEED_IMAGE_URLS;
