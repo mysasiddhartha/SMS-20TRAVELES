@@ -50,7 +50,7 @@ export default function FeaturedCarousel() {
     return featured.length > 0 ? featured : list;
   }, [allImages]);
 
-  const [viewportRef, embla] = useEmblaCarousel({ loop: true, align: "center" });
+  const [viewportRef, embla] = useEmblaCarousel({ loop: true, align: "start", containScroll: "trimSnaps" });
   const timerRef = useRef<number | null>(null);
   const [paused, setPaused] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -69,7 +69,7 @@ export default function FeaturedCarousel() {
           if (embla.canScrollNext()) embla.scrollNext();
           else embla.scrollTo(0);
         }
-      }, 3500);
+      }, 2800);
     };
     const stop = () => {
       if (timerRef.current) window.clearInterval(timerRef.current);
@@ -92,12 +92,12 @@ export default function FeaturedCarousel() {
 
   return (
     <div className="relative" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="overflow-hidden rounded-2xl border bg-card shadow aspect-[4/3]" ref={viewportRef}>
+      <div className="overflow-hidden rounded-2xl border bg-card shadow h-[42vh] sm:h-[50vh] md:h-[60vh]" ref={viewportRef}>
         <div className="flex h-full">
           {images.map((img) => (
             <button
               key={img.id}
-              className="relative min-w-full"
+              className="relative basis-full shrink-0 grow-0"
               type="button"
               onClick={() => embla?.scrollNext()}
               aria-label="Next slide"
@@ -119,7 +119,7 @@ export default function FeaturedCarousel() {
           />
         ))}
       </div>
-      <div className="absolute inset-y-0 left-0 flex items-center">
+      <div className="absolute inset-y-0 left-0 hidden sm:flex items-center">
         <button
           type="button"
           onClick={() => embla?.scrollPrev()}
@@ -128,7 +128,7 @@ export default function FeaturedCarousel() {
           Prev
         </button>
       </div>
-      <div className="absolute inset-y-0 right-0 flex items-center">
+      <div className="absolute inset-y-0 right-0 hidden sm:flex items-center">
         <button
           type="button"
           onClick={() => embla?.scrollNext()}
