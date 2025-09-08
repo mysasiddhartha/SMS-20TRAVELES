@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { SITE, telHref } from "@/config/site";
+import Logo from "./Logo";
 
 export default function Header({ className }: { className?: string }) {
   const phone = SITE.phone;
