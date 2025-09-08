@@ -28,7 +28,7 @@ export default function Index() {
   return (
     <div>
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[hsl(var(--primary))]/10 via-fuchsia-200/30 to-indigo-200/30" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[hsl(var(--primary))]/15 via-rose-200/40 to-amber-200/40" />
         <div className="container py-10 md:py-14">
           <div className="relative">
             <div className="w-full">
