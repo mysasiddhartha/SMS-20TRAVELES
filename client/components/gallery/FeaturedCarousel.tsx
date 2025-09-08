@@ -102,7 +102,7 @@ export default function FeaturedCarousel() {
               onClick={() => embla?.scrollNext()}
               aria-label="Next slide"
             >
-              <img src={img.dataUrl} alt={img.name} className="h-full w-full object-cover" />
+              <img src={img.dataUrl} alt={img.name} className="h-full w-full object-contain bg-black/5" />
             </button>
           ))}
         </div>
