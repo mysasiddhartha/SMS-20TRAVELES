@@ -1,10 +1,29 @@
 import ImageGallery from "@/components/gallery/ImageGallery";
 import FeaturedCarousel from "@/components/gallery/FeaturedCarousel";
 import { SITE, telHref } from "@/config/site";
+import { useEffect } from "react";
+import { SEED_IMAGE_URLS } from "@/config/seed-images";
 
 export default function Index() {
   const phone = SITE.phone;
   const tel = telHref(phone);
+
+  useEffect(() => {
+    try {
+      const key = "gallery.images";
+      const raw = localStorage.getItem(key);
+      const current: any[] = raw ? JSON.parse(raw) : [];
+      const existingUrls = new Set(current.map((i: any) => i.dataUrl));
+      const toAdd = SEED_IMAGE_URLS.filter((u) => !existingUrls.has(u)).map((url) => ({
+        id: crypto.randomUUID(),
+        dataUrl: url,
+        name: url.split("/").pop() || "image",
+        createdAt: Date.now(),
+        featured: true,
+      }));
+      if (toAdd.length) localStorage.setItem(key, JSON.stringify([...toAdd, ...current]));
+    } catch {}
+  }, []);
 
   return (
     <div>

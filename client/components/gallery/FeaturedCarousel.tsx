@@ -92,7 +92,7 @@ export default function FeaturedCarousel() {
 
   return (
     <div className="relative" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="overflow-hidden rounded-2xl border bg-card shadow h-[42vh] sm:h-[50vh] md:h-[60vh]" ref={viewportRef}>
+      <div className="overflow-hidden rounded-2xl border bg-card shadow h-[50vh] sm:h-[60vh] md:h-[70vh]" ref={viewportRef}>
         <div className="flex h-full">
           {images.map((img) => (
             <button
