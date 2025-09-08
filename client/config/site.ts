@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "Mysa",
+  name: "SMS TRAVELS",
   phone: "+1 (555) 555-5555",
 };
 
