@@ -7,6 +7,7 @@ interface StoredImage {
   dataUrl: string;
   name: string;
   createdAt: number;
+  featured?: boolean;
 }
 
 function readFiles(files: FileList | File[]): Promise<StoredImage[]> {
@@ -22,6 +23,7 @@ function readFiles(files: FileList | File[]): Promise<StoredImage[]> {
               dataUrl: String(reader.result),
               name: file.name,
               createdAt: Date.now(),
+              featured: false,
             });
           reader.onerror = () => reject(reader.error);
           reader.readAsDataURL(file);
@@ -51,6 +53,8 @@ export default function ImageGallery() {
   }, [onFiles]);
 
   const remove = (id: string) => setImages((prev) => prev.filter((i) => i.id !== id));
+  const toggleFeatured = (id: string) =>
+    setImages((prev) => prev.map((i) => (i.id === id ? { ...i, featured: !i.featured } : i)));
 
   return (
     <section className="container py-14">
@@ -95,8 +99,17 @@ export default function ImageGallery() {
           {images.map((img) => (
             <li key={img.id} className="group relative overflow-hidden rounded-xl border bg-card">
               <img src={img.dataUrl} alt={img.name} className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+              {img.featured ? (
+                <span className="absolute left-2 top-2 rounded-md bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-foreground shadow">Featured</span>
+              ) : null}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  onClick={() => toggleFeatured(img.id)}
+                  className="rounded-md bg-white/90 px-2 py-1 text-xs font-medium text-foreground shadow hover:bg-white"
+                >
+                  {img.featured ? "Unfeature" : "Feature"}
+                </button>
                 <button
                   onClick={() => remove(img.id)}
                   className="rounded-md bg-white/90 px-2 py-1 text-xs font-medium text-foreground shadow hover:bg-white"
