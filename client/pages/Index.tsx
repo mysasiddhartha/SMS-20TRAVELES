@@ -1,4 +1,5 @@
 import ImageGallery from "@/components/gallery/ImageGallery";
+import FeaturedCarousel from "@/components/gallery/FeaturedCarousel";
 import { SITE, telHref } from "@/config/site";
 
 export default function Index() {
